@@ -92,7 +92,7 @@ public class Test {
 			 * Sie muessen entweder den gesamten absoluten Pfad angeben oder die
 			 * Umgebung entsprechend einrichten.
 			 */
-			lm.read("irgendwo.txt");
+			lm.read("Aufgabe 2/src/webseiten/irgendwo.txt");
 
 			System.out
 					.println("  primitiver und unvollstaendiger Test der Methode buildMatrix");
