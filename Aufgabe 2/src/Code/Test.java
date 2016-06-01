@@ -1,3 +1,5 @@
+package Code;
+
 public class Test {
 
 	/*************************************************************/
@@ -7,7 +9,7 @@ public class Test {
 	/* leichteren Implementierung eigener Tests! */
 
 	/*
-	 * Nach Durchfuehrung der Tests startet der Crawler mit GUI. Mit ihm koennen
+	 * Nach Durchfuehrung der Tests startet der Code.Crawler mit Code.GUI. Mit ihm koennen
 	 * neue LinkMatrizen erstellt werden.
 	 */
 	/*************************************************************/
@@ -20,7 +22,7 @@ public class Test {
 
 		boolean test_gauss = true;
 		boolean test_pagerank = true;
-		boolean test_crawler = true;
+		boolean test_crawler = false;
 
 		double b[] = { 1, 1 };
 		double C[][] = { { 1, 0 }, { 0, 1 } };
@@ -30,15 +32,15 @@ public class Test {
 		double x[];
 
 		/******************************/
-		/* Test der Klasse Gauss */
+		/* Code.Test der Klasse Code.Gauss */
 		/******************************/
 		if (test_gauss) {
 			System.out.println("-----------------------------------------");
 			System.out
-					.println("primitiver und unvollstaendiger Test der Klasse Gauss");
+					.println("primitiver und unvollstaendiger Code.Test der Klasse Code.Gauss");
 
 			System.out
-					.println("  primitiver und unvollstaendiger Test der Methode backSubst");
+					.println("  primitiver und unvollstaendiger Code.Test der Methode backSubst");
 			x = Gauss.backSubst(C, b);
 			if (Util.vectorCompare(x, xC)) {
 				System.out.println("    Richtiges Ergebnis");
@@ -50,7 +52,7 @@ public class Test {
 			}
 
 			System.out
-					.println("  primitiver und unvollstaendiger Test der Methode solve");
+					.println("  primitiver und unvollstaendiger Code.Test der Methode solve");
 			x = Gauss.solve(C, b);
 			if (Util.vectorCompare(x, xC)) {
 				System.out.println("    Richtiges Ergebnis");
@@ -62,7 +64,7 @@ public class Test {
 			}
 
 			System.out
-					.println("  primitiver und unvollstaendiger Test der Methode solveSing");
+					.println("  primitiver und unvollstaendiger Code.Test der Methode solveSing");
 			x = Gauss.solveSing(A);
 			double lambda = xA[0] / x[0];
 			for (int i = 0; i < x.length; i++) {
@@ -79,12 +81,12 @@ public class Test {
 		}
 
 		/******************************/
-		/* Test der Klasse PageRank */
+		/* Code.Test der Klasse Code.PageRank */
 		/******************************/
 		if (test_pagerank) {
 			System.out.println("-----------------------------------------");
 			System.out
-					.println("primitiver und unvollstaendiger Test der Klasse PageRank");
+					.println("primitiver und unvollstaendiger Code.Test der Klasse Code.PageRank");
 
 			LinkMatrix lm = new LinkMatrix();
 			/*
@@ -95,7 +97,7 @@ public class Test {
 			lm.read("Aufgabe 2/src/webseiten/irgendwo.txt");
 
 			System.out
-					.println("  primitiver und unvollstaendiger Test der Methode buildMatrix");
+					.println("  primitiver und unvollstaendiger Code.Test der Methode buildMatrix");
 
 			A = PageRank.buildProbabilityMatrix(lm.L, 0.15);
 			double A0[][] = { { 0.5, 0.5 }, { 0.5, 0.5 } };
@@ -109,7 +111,7 @@ public class Test {
 			}
 
 			System.out
-					.println("  primitiver und unvollstaendiger Test der Methode rank");
+					.println("  primitiver und unvollstaendiger Code.Test der Methode rank");
 			String r[] = PageRank.getSortedURLs(lm.urls, lm.L, 0.15);
 
 			String r0[] = { "http://www.irgendwo.de", "http://www.nirgendwo.de" };

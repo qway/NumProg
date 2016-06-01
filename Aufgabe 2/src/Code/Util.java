@@ -1,3 +1,5 @@
+package Code;
+
 public class Util {
 	
 /* zu Vergleichszwecken ein schaerferer Wert als in der Angabe */

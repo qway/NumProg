@@ -1,10 +1,12 @@
+package Code;
+
 import java.util.Arrays;
 import java.util.Comparator;
 
 public class PageRank {
 
 	/**
-	 * Diese Methode erstellt die Matrix A~ fuer das PageRank-Verfahren
+	 * Diese Methode erstellt die Matrix A~ fuer das Code.PageRank-Verfahren
 	 * PARAMETER:
 	 * L: die Linkmatrix (s. Aufgabenblatt)
 	 * rho: Wahrscheinlichkeit, anstatt einem Link zu folgen,
@@ -87,7 +89,7 @@ public class PageRank {
 
 	/**
 	 * Diese Methode erstellt eine Rangliste der uebergebenen URLs nach
-	 * absteigendem PageRank.
+	 * absteigendem Code.PageRank.
 	 * PARAMETER:
 	 * urls: Die URLs der betrachteten Seiten
 	 * L: die Linkmatrix (s. Aufgabenblatt)

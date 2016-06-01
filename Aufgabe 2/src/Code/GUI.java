@@ -1,3 +1,5 @@
+package Code;
+
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
@@ -67,7 +69,7 @@ public class GUI extends JFrame {
 		this.setLocation(86, 200);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setContentPane(getJContentPane());
-		this.setTitle("Crawler");
+		this.setTitle("Code.Crawler");
 	}
 
 	/**
@@ -352,7 +354,7 @@ class Search extends JFrame implements ActionListener {
 			"Hier steht die Rank-Liste der Webseiten", 20, 50);
 
 	public Search() {
-		super("Search");
+		super("Code.Search");
 
 		mbar.add(openbutton);
 		mbar.add(rholabel);
