@@ -64,12 +64,10 @@ class Solve extends Gauss{
 }
 
 class SolveSing extends Gauss{
-    double[] b;
     double[][] A;
     double[] xA;
 
-    public SolveSing(double[] b, double[][] c, double[] xA) {
-        this.b = b;
+    public SolveSing(double[][] c, double[] xA) {
         A = c;
         this.xA = xA;
     }
