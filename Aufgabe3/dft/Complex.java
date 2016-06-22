@@ -58,6 +58,17 @@ public class Complex {
     }
 
     /**
+     * Dividiert zwei komplexe Zahlen
+     *
+     * @return "this / other"
+     */
+    public Complex div(Complex other) {
+        double retReal = (this.real * other.getReal() + this.imaginary * other.getImaginaer()) / (Math.pow(other.getReal(), 2) + Math.pow(other.getImaginaer(), 2));
+        double retIma = (this.imaginary * other.getReal() - this.real * other.getImaginaer()) / (Math.pow(other.getReal(), 2) + Math.pow(other.getImaginaer(), 2));
+        return new Complex(retReal, retIma);
+    }
+
+    /**
      * Potzenziert die Zahl mit einem ganzzahligen Exponenten
      *
      * @return "this ^ n"
@@ -126,7 +137,7 @@ public class Complex {
      * Winkel phi.
      */
     public static Complex fromPolar(double r, double phi) {
-        if(r < 0){
+        if (r < 0) {
             return null;
         }
         double retReal = r * Math.cos(phi);

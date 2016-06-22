@@ -22,9 +22,9 @@ public class IFFT {
         }
 
         int m = c.length / 2;
-        Complex[] temp1;
-        Complex[] temp2;
-        for (int j = 0; j < c.length; c++) {
+        Complex[] temp1 = new Complex[m];
+        Complex[] temp2 = new Complex[m];
+        for (int j = 0; j < c.length; j++) {
             if (j % 2 == 0) {
                 temp1[j / 2] = c[j];
             } else {
@@ -33,11 +33,16 @@ public class IFFT {
         }
         Complex[] z1 = ifft(temp1);
         Complex[] z2 = ifft(temp2);
-        Complex omega; //?
-        Complex[] v;
+
+        //FromPolar and conjugate method
+        Complex omega1 = Complex.fromPolar(1, 2 * Math.PI / c.length).conjugate();
+        //Division method
+        //Complex omega2 = new Complex(Math.E,0).power()
+
+        Complex[] v = new Complex[c.length];
         for (int j = 0; j < m; j++) {
-            v[j] = z1[j] + omega ^ j * z2[j];
-            v[m + j] = z1[j] - omega ^ j * z2[j];
+            v[j] = z1[j].add(omega1.power(j).mul(z2[j]));
+            v[m + j] = z1[j].sub(omega1.power(j).mul(z2[j]));
         }
 
         return v;
