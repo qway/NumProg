@@ -34,8 +34,7 @@ public class Complex {
      * @return "this + other"
      */
     public Complex add(Complex other) {
-        // TODO: diese Methode ist zu implementieren
-        return new Complex();
+        return new Complex(this.real + other.getReal(), this.imaginary + other.getImaginaer());
     }
 
     /**
@@ -44,8 +43,7 @@ public class Complex {
      * @return "this - other"
      */
     public Complex sub(Complex other) {
-        // TODO: diese Methode ist zu implementieren
-        return new Complex();
+        return new Complex(this.real - other.getReal(), this.imaginary - other.getImaginaer());
     }
 
     /**
@@ -54,8 +52,9 @@ public class Complex {
      * @return "this * other"
      */
     public Complex mul(Complex other) {
-        // TODO: diese Methode ist zu implementieren
-        return new Complex();
+        double retReal = this.real * other.getReal() - this.imaginary * other.getImaginaer();
+        double retIma = this.real * other.getImaginaer() + this.imaginary * other.getReal();
+        return new Complex(retReal, retIma);
     }
 
     /**
@@ -127,7 +126,11 @@ public class Complex {
      * Winkel phi.
      */
     public static Complex fromPolar(double r, double phi) {
-        // TODO: diese Methode ist zu implementieren
-        return new Complex();
+        if(r < 0){
+            return null;
+        }
+        double retReal = r * Math.cos(phi);
+        double retIma = r * Math.sin(phi);
+        return new Complex(retReal, retIma);
     }
 }

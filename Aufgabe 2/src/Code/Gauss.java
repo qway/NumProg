@@ -116,8 +116,8 @@ public class Gauss {
 	 * PARAMETER:
 	 * A: Eine singulaere Matrix der Groesse n x n
 	 */
-	public static double[] solveSing(double[][] A) {
-		//TODO: Remove Ugly redundant Code in this File :(
+	public static double[] solveSing(double[][] A)
+
 		int n = A.length;
 		double[][] Ar = new double[n][n];
 		double[] ret = new double[n];
@@ -204,9 +204,6 @@ public class Gauss {
 
 		}
 
-		//TODO: falls nullzeile in letzter zeile und wir nicht in max < 1E-10 gelaufen sind ?
-		//TODO: invertierbar? null vektor zurückgeben ?
-		//TODO: dieser Randfall ist: A ist eine obere Dreiecksmatrix ?
 
 		int k = n-1;
 		double max = Math.abs(Ar[k][k]);

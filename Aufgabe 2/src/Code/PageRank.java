@@ -29,7 +29,7 @@ public class PageRank {
 		// Matrix a_ij mit 1/#Links die von j ausgehen belegen
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				// TODO: Division by Zero ? How to handle ? If evry row elemnt is 0,
+				// Division by Zero ? How to handle ? If evry row elemnt is 0,
 				// its no longer a stocastical Matrix with rowsum 1?
 				a[i][j] = 1.0 / link_anz[j];
 			}
