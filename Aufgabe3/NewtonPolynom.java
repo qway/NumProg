@@ -26,7 +26,7 @@ public class NewtonPolynom implements InterpolationMethod {
 	double[] f;
 
 	/**
-	 * leerer Konstruktore
+	 * leerer Konstruktor
 	 */
 	public NewtonPolynom() {
 	};
@@ -86,7 +86,21 @@ public class NewtonPolynom implements InterpolationMethod {
 	 * Es gilt immer: x und y sind gleich lang.
 	 */
 	private void computeCoefficients(double[] y) {
-		/* TODO: diese Methode ist zu implementieren */
+
+		// TODO Sonderfall x.length <= 1
+		int n = x.length-1;
+		a = Arrays.copyOf(y, n+1);
+		f = new double[n+1];
+		f[n] = a[n];
+		for (int i = 1; i < n; i++) { // Welche Reihe soll berechnet werden?
+			for (int j = n; j < i; j++) { // Geht von unten nach oben und hört so auf, das die Werte die in a gehören drinbleiben
+				a[j] = (a[j]-a[j-1]) / (x[j]-x[j-1]);
+			}
+			f[n-i] = a[n]; // Füllt immer den aktuellen letzten Wert der Diagonale in das fortlaufende f.
+		}
+		f[0] = a[n];
+
+
 	}
 
 	/**
@@ -120,7 +134,28 @@ public class NewtonPolynom implements InterpolationMethod {
 	 *            neuer Stuetzwert
 	 */
 	public void addSamplingPoint(double x_new, double y_new) {
-		/* TODO: diese Methode ist zu implementieren */
+		for (double v : x) {
+			if(v == x_new) return;
+		}
+		f = concat(f, y_new);
+		x = concat(x, x_new);
+
+		for (int i = f.length - 2; i >= 0; i--) {
+			f[i] = (f[i+1]-f[i]) / (x[i+1]-x[i]);
+		}
+		a = concat(a, f[f.length-1]);
+
+	}
+
+	// Hilfsmethode damit addSamplingPoint sauberer aussieht.
+	private static double[] concat(double[] arr, double x){
+
+		double[] res = new double[arr.length+1];
+		for (int i = 0; i < arr.length; i++) {
+			res[i] = arr[i];
+		}
+		res[arr.length] = x;
+		return arr;
 	}
 
 	/**
@@ -130,7 +165,12 @@ public class NewtonPolynom implements InterpolationMethod {
 	 */
 	@Override
 	public double evaluate(double z) {
-		/* TODO: diese Methode ist zu implementieren */
-		return 0.0;
+		int n = x.length-1;
+		double res = a[n];
+		for (int i = n-1; i >= 0; i--) {
+			res *= (z - x[i]);
+			res += a[i];
+		}
+		return res;
 	}
 }

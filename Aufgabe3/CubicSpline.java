@@ -83,6 +83,16 @@ public class CubicSpline implements InterpolationMethod {
 	 */
 	public void computeDerivatives() {
 		/* TODO: diese Methode ist zu implementieren */
+		// Berechnung von c
+		double[] c = new double[yprime.length];
+		int n = y.length-3;//Da zwei Stellen fehlen
+		c[0] = 1/3*(y[2]-y[0]-(h/3)*yprime[0]);
+		c[c.length-1] = 1/3*(y[n]-y[n-2]-(h/3)*yprime[n]);
+		for (int i = 1; i <= c.length-3; i++) {
+			c[i] = y[i+2]-y[i];
+		}
+		//TODO yprime berechnen
+
 	}
 
 	/**
@@ -95,5 +105,9 @@ public class CubicSpline implements InterpolationMethod {
 	public double evaluate(double z) {
 		/* TODO: diese Methode ist zu implementieren */
 		return 0.0;
+	}
+
+	private double x(int x){
+		return a+h*x;
 	}
 }
