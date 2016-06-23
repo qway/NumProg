@@ -87,7 +87,6 @@ public class NewtonPolynom implements InterpolationMethod {
 	 */
 	private void computeCoefficients(double[] y) {
 
-		// TODO Sonderfall x.length <= 1
 		int n = x.length-1;
 		a = Arrays.copyOf(y, n+1);
 		f = new double[n+1];

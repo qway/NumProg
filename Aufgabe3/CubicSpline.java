@@ -4,9 +4,9 @@ import java.lang.Math.*;
 /**
  * Die Klasse CubicSpline bietet eine Implementierung der kubischen Splines. Sie
  * dient uns zur effizienten Interpolation von aequidistanten Stuetzpunkten.
- * 
+ *
  * @author braeckle
- * 
+ *
  */
 public class CubicSpline implements InterpolationMethod {
 
@@ -75,7 +75,7 @@ public class CubicSpline implements InterpolationMethod {
 	 * Tridiagonalen Matrix A und der rechten Seite c aufgebaut und geloest.
 	 * Anschliessend sind die berechneten Ableitungen y1' bis yn-1' in der
 	 * Membervariable yprime gespeichert.
-	 * 
+	 *
 	 * Zum Zeitpunkt des Aufrufs stehen die Randbedingungen in yprime[0] und yprime[n].
 	 * Speziell bei den "kleinen" Faellen mit Intervallzahlen n = 2
 	 * oder 3 muss auf die Struktur des Gleichungssystems geachtet werden. Der
@@ -83,7 +83,6 @@ public class CubicSpline implements InterpolationMethod {
 	 * berechnet werden muessen.
 	 */
 	public void computeDerivatives() {
-		/* TODO: diese Methode ist zu implementieren */
 		// Berechnung von c
 		double[] c = new double[yprime.length-2];
 		int n = y.length-3;//Da die Ränder ignoriert werden
@@ -94,21 +93,14 @@ public class CubicSpline implements InterpolationMethod {
 		}
 		// Thomas Algorithmus zur Berechnung von yprime
 		double[] obere_diagonale = new double[c.length-1];
-		double[] c_ = new double[c.length];
-		obere_diagonale[0] = 0.25;
-		c_[0] = c[0]/4;
-		for (int i = 1; i < obere_diagonale.length; i++) {
-			obere_diagonale[i] = 1/(4-obere_diagonale[i-1]);
-			c_[i] = (c[i]-c_[i-1])/(4-c_[i-1]);
-		}
-		c_[n] = (c[n]-c_[n-1])/(4-obere_diagonale[n-1]);
-		yprime[n+1] = c_[n];
-		for (int i = c_.length-2; i >= 0 ; i--) {
-			yprime[i+1] =
-					c_[i]
-					-obere_diagonale[i]
-					*yprime[i+2];
-		}
+		double[] mittlere_diagonale = new double[c.length];
+		double[] untere_diagonale = new double[c.length-1];
+		Arrays.fill(obere_diagonale,1);
+		Arrays.fill(mittlere_diagonale,4);
+		Arrays.fill(untere_diagonale,1);
+		TridiagonalMatrix mat = new TridiagonalMatrix(obere_diagonale, mittlere_diagonale, untere_diagonale);
+
+		System.arraycopy(mat.solveLinearSystem(c), 0, yprime, 1, c.length);
 	}
 
 	/**
@@ -119,7 +111,6 @@ public class CubicSpline implements InterpolationMethod {
 	 */
 	@Override
 	public double evaluate(double z) {
-		/* TODO: diese Methode ist zu implementieren */
 
 		if(z <= x(0)) return y[0];
 		if(z >= x(n)) return y[n];
@@ -127,10 +118,10 @@ public class CubicSpline implements InterpolationMethod {
 		while (i < n && z > x(i+1)){
 			i++;
 		}
-		double t = z - (x(i)/h);
+		double t = (z - x(i))/h;
 		double res = y[i]*(1-3*Math.pow(t, 2)+2*Math.pow(t, 3));
 		res += y[i+1]*(3*Math.pow(t, 2)-2*Math.pow(t, 3));
-		res += h * yprime[i]*(t-2*Math.pow(t, 2)+3*Math.pow(t, 3));
+		res += h * yprime[i]*(t-2*Math.pow(t, 2)+Math.pow(t, 3));
 		res += h * yprime[i+1]*(-1*Math.pow(t, 2)+Math.pow(t, 3));
 
 		return res;

@@ -11,8 +11,8 @@ public class Test {
      */
     public static void main(String[] args) {
         //testNewton();
-        testSplines();
-        //testFFT();
+        //testSplines();
+        testFFT();
     }
 
     private static void testNewton() {
@@ -139,7 +139,7 @@ public class Test {
             System.out.println(Arrays.toString(spl.getDerivatives())
                     + " sollte sein: \n[0.0, -3.75552282, -2.97790868, 3.66715758, 6.30927835, 7.09572901, -10.69219440, -0.32695139, -12.0].");
             // to be calculated jet
-            //System.out.println(spl.evaluate(0) + " sollte sein: 0.0");
+            System.out.println(spl.evaluate(0) + " sollte sein: 0.0");
             //System.out.println(spl.evaluate(-0.5) + " sollte sein: 2.0625");
             //System.out.println(spl.evaluate(-0.8) + " sollte sein: 2.88");
             System.out.println("-------------------------------");
@@ -158,6 +158,9 @@ public class Test {
             spl.init(1, 2, 1, y);
             System.out.println(Arrays.toString(spl.getDerivatives())
                     + " sollte sein: [0.0, 0.0].");
+        }
+        {
+
         }
     }
 
