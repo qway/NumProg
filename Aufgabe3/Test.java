@@ -10,9 +10,9 @@ public class Test {
      * @param args
      */
     public static void main(String[] args) {
-        testNewton();
+        //testNewton();
         testSplines();
-        testFFT();
+        //testFFT();
     }
 
     private static void testNewton() {
@@ -108,6 +108,7 @@ public class Test {
         {
             CubicSpline spl = new CubicSpline();
             double[] y = {2, 0, 2, 3};
+
             spl.init(-1, 2, 3, y);
             spl.setBoundaryConditions(9, 0);
             System.out.println(Arrays.toString(spl.getDerivatives())
@@ -136,7 +137,7 @@ public class Test {
             spl.init(1, 3, 8, y);
             spl.setBoundaryConditions(0, -12);
             System.out.println(Arrays.toString(spl.getDerivatives())
-                    + " sollte sein: [0.0, -3.75552282, -2.97790868, 3.66715758, 6.30927835, 7.09572901, -10.69219440, -0.32695139, -12.0].");
+                    + " sollte sein: \n[0.0, -3.75552282, -2.97790868, 3.66715758, 6.30927835, 7.09572901, -10.69219440, -0.32695139, -12.0].");
             // to be calculated jet
             //System.out.println(spl.evaluate(0) + " sollte sein: 0.0");
             //System.out.println(spl.evaluate(-0.5) + " sollte sein: 2.0625");

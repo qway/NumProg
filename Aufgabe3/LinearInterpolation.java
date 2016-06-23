@@ -94,7 +94,7 @@ public class LinearInterpolation implements InterpolationMethod {
 		if(z <= x[0]) return y[0];
 		if(z >= x[n]) return y[n];
 		int i = 0;
-		while (i < n && z < x[i+1]){
+		while (i < n && z > x[i+1]){
 			i++;
 		}
 

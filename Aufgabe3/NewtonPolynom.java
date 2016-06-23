@@ -92,11 +92,13 @@ public class NewtonPolynom implements InterpolationMethod {
 		a = Arrays.copyOf(y, n+1);
 		f = new double[n+1];
 		f[n] = a[n];
-		for (int i = 1; i < n; i++) { // Welche Reihe soll berechnet werden?
-			for (int j = n; j < i; j++) { // Geht von unten nach oben und hört so auf, das die Werte die in a gehören drinbleiben
-				a[j] = (a[j]-a[j-1]) / (x[j]-x[j-1]);
+		for (int i = 1; i <= n; i++) { // Welche Reihe soll berechnet werden?
+
+			for (int j = n; j >= i; j--) { // Geht von unten nach oben und hört so auf, das die Werte die in a gehören drinbleiben
+				a[j] = (a[j]-a[j-1]) / (x[j]-x[j-i]);
 			}
 			f[n-i] = a[n]; // Füllt immer den aktuellen letzten Wert der Diagonale in das fortlaufende f.
+
 		}
 		f[0] = a[n];
 

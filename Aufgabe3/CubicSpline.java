@@ -87,10 +87,10 @@ public class CubicSpline implements InterpolationMethod {
 		// Berechnung von c
 		double[] c = new double[yprime.length-2];
 		int n = y.length-3;//Da die Ränder ignoriert werden
-		c[0] = 1/3*(y[2]-y[0]-(h/3)*yprime[0]);
-		c[c.length-1] = 1/3*(y[n+1]-y[n-1]-(h/3)*yprime[n+1]);
+		c[0] = (3/h)*(y[2]-y[0]-(h/3)*yprime[0]);
+		c[c.length-1] = (3/h)*(y[n+2]-y[n]-(h/3)*yprime[n+2]);
 		for (int i = 1; i <= c.length-2; i++) {
-			c[i] = y[i+2]-y[i];
+			c[i] = (3/h)*(y[i+2]-y[i]);
 		}
 		// Thomas Algorithmus zur Berechnung von yprime
 		double[] obere_diagonale = new double[c.length-1];
@@ -101,11 +101,13 @@ public class CubicSpline implements InterpolationMethod {
 			obere_diagonale[i] = 1/(4-obere_diagonale[i-1]);
 			c_[i] = (c[i]-c_[i-1])/(4-c_[i-1]);
 		}
-		c_[n] = (c[n]-c_[n-1])/(4-c_[n-1]);
-
-		yprime[n] = c_[n];
-		for (int i = yprime.length-2; i > 0 ; i--) {
-			yprime[i] = c_[i]-obere_diagonale[i]*yprime[i+1];
+		c_[n] = (c[n]-c_[n-1])/(4-obere_diagonale[n-1]);
+		yprime[n+1] = c_[n];
+		for (int i = c_.length-2; i >= 0 ; i--) {
+			yprime[i+1] =
+					c_[i]
+					-obere_diagonale[i]
+					*yprime[i+2];
 		}
 	}
 
@@ -118,17 +120,20 @@ public class CubicSpline implements InterpolationMethod {
 	@Override
 	public double evaluate(double z) {
 		/* TODO: diese Methode ist zu implementieren */
+
+		if(z <= x(0)) return y[0];
+		if(z >= x(n)) return y[n];
 		int i = 0;
-		while (i < n+1 && z < x(i+1)){
+		while (i < n && z > x(i+1)){
 			i++;
 		}
-		double t = z - x(i)/h;
+		double t = z - (x(i)/h);
 		double res = y[i]*(1-3*Math.pow(t, 2)+2*Math.pow(t, 3));
 		res += y[i+1]*(3*Math.pow(t, 2)-2*Math.pow(t, 3));
 		res += h * yprime[i]*(t-2*Math.pow(t, 2)+3*Math.pow(t, 3));
 		res += h * yprime[i+1]*(-1*Math.pow(t, 2)+Math.pow(t, 3));
 
-		return 0.0;
+		return res;
 	}
 
 	private double x(int x){

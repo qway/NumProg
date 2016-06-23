@@ -7,7 +7,7 @@ public class Test_Interpolation {
 	 */
 	public static void main(String[] args) {
 		testNewton();
-		testSplines();
+		//testSplines();
 	}
 
 	private static void testNewton() {
@@ -23,8 +23,9 @@ public class Test_Interpolation {
 	public static void testSplines() {
 		CubicSpline spl = new CubicSpline();
 		double[] y = { 2, 0, 2, 3 };
-		spl.init(-1, 2, 3, y);
+
 		spl.setBoundaryConditions(9, 0);
+		spl.init(-1, 2, 3, y);
 		System.out.println(Arrays.toString(spl.getDerivatives())
 				+ " sollte sein: [9.0, -3.0, 3.0, 0.0].");
 	}
