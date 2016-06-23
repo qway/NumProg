@@ -6,9 +6,7 @@ import dft.Complex;
 
 public class Test {
 
-    /**
-     * @param args
-     */
+
     public static void main(String[] args) {
         //testNewton();
         //testSplines();
@@ -164,21 +162,38 @@ public class Test {
         }
     }
 
-    public static void testFFT() {
-        System.out.println("Teste Fast Fourier Transformation");
+    private static void testFFT() {
+        {
+            System.out.println("Teste Fast Fourier Transformation");
 
-        double[] v = new double[4];
-        for (int i = 0; i < 4; i++)
-            v[i] = i + 1;
-        Complex[] c = dft.DFT.dft(v);
-        Complex[] v2 = dft.IFFT.ifft(c);
-
-        for (int i = 0; i < 4; i++) {
-            System.out.println(v2[i]);
+        int length = 16;
+        double[] v = new double[length];
+        for (int i = 0; i < length; i++) {
+            v[i] = Math.random() * 13;
         }
-        System.out
-                .println("Richtig waeren gerundet: Eigene Beispiele ueberlegen");
+        Complex[] v2 = dft.IFFT.ifft(DFT.dft(v));
+        double[] v2real = new double[length];
+        for (int i = 0; i < length; ++i) {
+            v2real[i] = v2[i].getReal();
+        }
+        System.out.println(Arrays.toString(v) + "\n" + Arrays.toString(v2real));
+    }{
 
-        System.out.println("*************************************\n");
+            System.out.println("*************************************\n");
+
+            double[] v = new double[4];
+            for (int i = 0; i < 4; i++)
+                v[i] = i + 1;
+            Complex[] c = dft.DFT.dft(v);
+            Complex[] v2 = dft.IFFT.ifft(c);
+
+            for (int i = 0; i < 4; i++) {
+                System.out.println(v2[i]);
+            }
+            System.out
+                    .println("Richtig waeren gerundet: Eigene Beispiele ueberlegen");
+
+            System.out.println("*************************************\n");
+        }
     }
 }
